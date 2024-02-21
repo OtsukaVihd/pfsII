@@ -10,3 +10,4 @@ app.use('/usuarios', usuarioRoute);
 app.listen(5000, function() {
     console.log("backend em execução");
 })
+//
