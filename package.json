@@ -1,0 +1,17 @@
+{
+  "dependencies": {
+    "express": "^4.18.2"
+  },
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --es-module-specifier-resolution=node server.js"
+  },
+  "name": "pfs2",
+  "version": "1.0.0",
+  "description": "Backend da disciplina PFS2",
+  "main": "server.js",
+  "devDependencies": {},
+  "author": "eu",
+  "license": "ISC",
+  "type":"module"
+}
