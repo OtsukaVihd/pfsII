@@ -1,11 +1,11 @@
 let usuarios = [
     {
         id: 1,
-        nome: "Fulvio",
-        email: "fulvio@unoeste.br",
+        nome: "Vitor",
+        email: "votsuka@unoeste.br",
         cidade: "Presidente Prudente",
         sexo: "M",
-        idade: 26
+        idade: 22
     },
     {
         id: 2,
@@ -34,6 +34,13 @@ export default class UsuarioController {
             res.status(404).json({msg: "Usuário não encontrado"});
         }
 
+    }
+
+    excluir(req, res){
+
+        usuarios = usuarios.filter(x => x.id != req.params.id)
+
+        res.status(200).json({msg: "Exclusão realizada com sucesso"})
     }
 
     criar(req, res) {
