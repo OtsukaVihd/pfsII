@@ -11,6 +11,6 @@ const doc = {
 const outputFile = './swagger_output.json';
 const routes = ['./server.js'];
 
-swaggerAutogen(outputFile, routes, doc);
-
-
+swaggerAutogen({openapi: '3.0.0'})(outputFile, routes, doc).then( async() => {
+    await import('./server.js');
+});

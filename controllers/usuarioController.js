@@ -1,4 +1,4 @@
-let usuarios = [
+var usuarios = [
     {
         id: 1,
         nome: "Vitor",
@@ -93,6 +93,8 @@ export default class UsuarioController {
             detalhes: ex.message});
         }
     }
+
+
 
     
     alterarEmail(req, res){

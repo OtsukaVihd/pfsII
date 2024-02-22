@@ -5,7 +5,7 @@
     "swagger-ui-express": "^5.0.0"
   },
   "scripts": {
-    "start": "node server.js",
+    "start": "node swagger.js",
     "dev": "node --es-module-specifier-resolution=node server.js"
   },
   "name": "pfs2",
