@@ -7,7 +7,6 @@ import { createRequire } from 'module';
 const require = createRequire(import.meta.url);
 const outputJson = require('./swagger_output.json');
 
-
 import swaggerUi from 'swagger-ui-express'
 
 
@@ -25,4 +24,3 @@ app.use('/login', loginRoute);
 app.listen(5000, function() {
     console.log("backend em execução");
 })
-// 

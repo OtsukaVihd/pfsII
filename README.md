@@ -1,0 +1,1 @@
+Projeto academico de FullStack II utilizando  RESTful API | node.js | express | swagger | next.js
