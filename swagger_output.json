@@ -44,9 +44,33 @@
         ],
         "summary": "Cria um novo usuário",
         "description": "",
+        "parameters": [
+          {
+            "name": "chaveapi",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
         "responses": {
-          "default": {
-            "description": ""
+          "401": {
+            "description": "Unauthorized"
+          }
+        },
+        "security": [
+          {
+            "apiKeyAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/usuarioModel"
+              }
+            }
           }
         }
       },
@@ -56,9 +80,33 @@
         ],
         "summary": "Atualiza um ou mais atributos dos usuários",
         "description": "",
+        "parameters": [
+          {
+            "name": "chaveapi",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
         "responses": {
-          "default": {
-            "description": ""
+          "401": {
+            "description": "Unauthorized"
+          }
+        },
+        "security": [
+          {
+            "apiKeyAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/usuarioModel"
+              }
+            }
           }
         }
       }
@@ -78,13 +126,25 @@
             "schema": {
               "type": "string"
             }
+          },
+          {
+            "name": "chaveapi",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "responses": {
-          "default": {
-            "description": ""
+          "401": {
+            "description": "Unauthorized"
           }
-        }
+        },
+        "security": [
+          {
+            "apiKeyAuth": []
+          }
+        ]
       }
     },
     "/usuarios/excluir/{id}": {
@@ -102,13 +162,25 @@
             "schema": {
               "type": "string"
             }
+          },
+          {
+            "name": "chaveapi",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "responses": {
-          "default": {
-            "description": ""
+          "401": {
+            "description": "Unauthorized"
           }
-        }
+        },
+        "security": [
+          {
+            "apiKeyAuth": []
+          }
+        ]
       }
     },
     "/usuarios/alterar-email/{id}": {
@@ -127,13 +199,25 @@
               "type": "string"
             },
             "description": "ID do usuário que terá o email atualizado"
+          },
+          {
+            "name": "chaveapi",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "responses": {
-          "default": {
-            "description": ""
+          "401": {
+            "description": "Unauthorized"
           }
-        }
+        },
+        "security": [
+          {
+            "apiKeyAuth": []
+          }
+        ]
       }
     },
     "/perfil/": {
@@ -143,14 +227,31 @@
         ],
         "summary": "Lista os perfis cadastrados",
         "description": "",
+        "parameters": [
+          {
+            "name": "chaveapi",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK"
           },
+          "401": {
+            "description": "Unauthorized"
+          },
           "500": {
             "description": "Internal Server Error"
           }
-        }
+        },
+        "security": [
+          {
+            "apiKeyAuth": []
+          }
+        ]
       }
     },
     "/login/autenticar/": {
@@ -196,6 +297,27 @@
           "senha": {
             "type": "string",
             "example": "123"
+          }
+        }
+      },
+      "usuarioModel": {
+        "type": "object",
+        "properties": {
+          "usuId": {
+            "type": "number",
+            "example": 999
+          },
+          "usuNome": {
+            "type": "string",
+            "example": "Fulano"
+          },
+          "usuEmail": {
+            "type": "string",
+            "example": "123abc"
+          },
+          "usuSenha": {
+            "type": "string",
+            "example": "fulano@unoeste.br"
           }
         }
       }

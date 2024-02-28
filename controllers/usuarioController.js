@@ -5,7 +5,8 @@ var usuarios = [
         email: "votsuka@unoeste.br",
         cidade: "Presidente Prudente",
         sexo: "M",
-        idade: 22
+        idade: 22,
+        senha: '123'
     },
     {
         id: 2,
@@ -13,7 +14,8 @@ var usuarios = [
         email: "fulano@unoeste.br",
         cidade: "Presidente Prudente",
         sexo: "M",
-        idade: 44
+        idade: 44,
+        senha: '321'
     }
 ]
 

@@ -13,33 +13,71 @@ router.get('/', auth.validar, (req, res) => {
     /* #swagger.security = [{
         apiKeyAuth: []
     }]
-        */
+    */
     ctrl.listar
 });
-router.get('/:id',  (req, res) => {
+router.get('/:id', auth.validar, (req, res) => {
     // #swagger.tags = ['Usuários']
     // #swagger.summary = 'Obtém um usuário pelo ID'
+    /* #swagger.security = [{
+        apiKeyAuth: []
+    }]
+    */
     ctrl.obter
 });
-router.post('/',  (req, res) => {
+router.post('/', auth.validar, (req, res) => {
     // #swagger.tags = ['Usuários']
     // #swagger.summary = 'Cria um novo usuário'
+    /* #swagger.security = [{
+        apiKeyAuth: []
+    }]
+    #swagger.requestBody = {
+        required: true,
+        content: {
+            'application/json': {
+                schema: { $ref: "#/components/schemas/usuarioModel" }
+            }
+        }
+
+    }
+    */
     ctrl.criar
 });
-router.delete('/excluir/:id',  (req, res) => {
+router.delete('/excluir/:id', auth.validar, (req, res) => {
     // #swagger.tags = ['Usuários']
     // #swagger.summary = 'Exclui um usuário pelo ID'
+    /* #swagger.security = [{
+        apiKeyAuth: []
+    }]
+    */
     ctrl.excluir
 });
-router.put('/',  (req, res) => {
+router.put('/', auth.validar, (req, res) => {
     // #swagger.tags = ['Usuários']
     // #swagger.summary = 'Atualiza um ou mais atributos dos usuários'
+    /* #swagger.security = [{
+        apiKeyAuth: []
+    }]
+    #swagger.requestBody = {
+        required: true,
+        content: {
+            'application/json': {
+                schema: { $ref: "#/components/schemas/usuarioModel" }
+            }
+        }
+
+    }
+    */
     ctrl.atualizar
 });
-router.patch('/alterar-email/:id',  (req, res) => {
+router.patch('/alterar-email/:id', auth.validar, (req, res) => {
     // #swagger.tags = ['Usuários']
     // #swagger.summary = 'Altera o e-mail de um usuário'
     // #swagger.parameters['id'] = { description: 'ID do usuário que terá o email atualizado' }
+    /* #swagger.security = [{
+        apiKeyAuth: []
+    }]
+    */
     ctrl.alterarEmail
 });
 
