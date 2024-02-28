@@ -1,12 +1,19 @@
 import express from 'express'
 import UsuarioController from '../controllers/usuarioController.js'
+import Autenticacao from '../middleware/autenticacao.js';
 
 let router = express.Router();
 
 let ctrl = new UsuarioController();
-router.get('/', (req, res) => {
+let auth = new Autenticacao();
+
+router.get('/', auth.validar, (req, res) => {
     // #swagger.tags = ['Usuários']
     // #swagger.summary = 'Lista os usuários cadastrados'
+    /* #swagger.security = [{
+        apiKeyAuth: []
+    }]
+        */
     ctrl.listar
 });
 router.get('/:id',  (req, res) => {

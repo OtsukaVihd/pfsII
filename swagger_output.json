@@ -18,11 +18,25 @@
         ],
         "summary": "Lista os usuários cadastrados",
         "description": "",
-        "responses": {
-          "default": {
-            "description": ""
+        "parameters": [
+          {
+            "name": "chaveapi",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
           }
-        }
+        ],
+        "responses": {
+          "401": {
+            "description": "Unauthorized"
+          }
+        },
+        "security": [
+          {
+            "apiKeyAuth": []
+          }
+        ]
       },
       "post": {
         "tags": [
@@ -142,16 +156,13 @@
     "/login/autenticar/": {
       "post": {
         "tags": [
-          "Autenticar"
+          "Login"
         ],
         "summary": "Autentica um usuário",
         "description": "",
         "responses": {
           "200": {
             "description": "OK"
-          },
-          "400": {
-            "description": "Bad Request"
           },
           "404": {
             "description": "Not Found"
@@ -161,22 +172,40 @@
           }
         },
         "requestBody": {
+          "required": true,
           "content": {
             "application/json": {
               "schema": {
-                "type": "object",
-                "properties": {
-                  "email": {
-                    "example": "any"
-                  },
-                  "nome": {
-                    "example": "any"
-                  }
-                }
+                "$ref": "#/components/schemas/loginModel"
               }
             }
           }
         }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "loginModel": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "example": "teste@teste.com"
+          },
+          "senha": {
+            "type": "string",
+            "example": "123"
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "apiKeyAuth": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "chaveapi",
+        "description": "Chave de acesso para a utilização da API"
       }
     }
   }
