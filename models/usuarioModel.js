@@ -1,4 +1,4 @@
-import Database from '../database/database.js';
+import Database from '../db/database.js';
 
 let banco = new Database();
 
@@ -58,10 +58,24 @@ export default class UsuarioModel{
             'usuId': this.#usuId,
             'usuNome': this.#usuNome,
             'usuEmail': this.#usuEmail,
-            'usuSenha': this.#usuSenha
+            'usuSenha': this.#usuSenha,
+            'perfil': this.#perfil
         }
     }
 
+    async obter(id){
+        let sql = "select * from tb_usuario where usu_id = ?";
+
+        let valores = [id];
+
+        let row = await banco.ExecutaComando(sql, valores);
+
+        if(row.length > 0){
+            return new UsuarioModel(row[0]['usu_id'], row[0]['usu_nome'], row[0]['usu_email'], row[0]['usu_senha'], row[0]['per_id']);
+        }
+
+        return null;
+    }
 
     async listar(){
         let lista = [];
@@ -69,7 +83,7 @@ export default class UsuarioModel{
 
         let rows = await banco.ExecutaComando(sql);
 
-        for(let i = 0; rows.length; i++){
+        for(let i = 0; i < rows.length; i++){
             let row = rows[i];
 
             lista.push(new UsuarioModel(row['usu_id'], row['usu_nome'], row['usu_email'], row['usu_senha'], row['per_id']));
@@ -78,5 +92,14 @@ export default class UsuarioModel{
         return lista;
     }
 
+    async gravar(){
+        let sql = 'insert into tb_usuario (usu_nome, usu_email, usu_senha, per_id) values (?, ?, ?, ?)';
+
+        let valores = [this.#usuNome, this.#usuEmail, this.#usuSenha, this.#perfil];
+
+        let result = await banco.ExecutaComandoNonQuery(sql, valores);
+        
+        return result;
+    }
 }
 

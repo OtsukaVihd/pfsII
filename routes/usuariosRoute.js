@@ -14,7 +14,7 @@ router.get('/', auth.validar, (req, res) => {
         apiKeyAuth: []
     }]
     */
-    ctrl.listar
+    ctrl.listar(req, res);
 });
 router.get('/:id', auth.validar, (req, res) => {
     // #swagger.tags = ['Usuários']
@@ -23,7 +23,7 @@ router.get('/:id', auth.validar, (req, res) => {
         apiKeyAuth: []
     }]
     */
-    ctrl.obter
+    ctrl.obter(req, res);
 });
 router.post('/', auth.validar, (req, res) => {
     // #swagger.tags = ['Usuários']
@@ -41,7 +41,7 @@ router.post('/', auth.validar, (req, res) => {
 
     }
     */
-    ctrl.criar
+    ctrl.criar(req, res);
 });
 router.delete('/excluir/:id', auth.validar, (req, res) => {
     // #swagger.tags = ['Usuários']
@@ -50,7 +50,7 @@ router.delete('/excluir/:id', auth.validar, (req, res) => {
         apiKeyAuth: []
     }]
     */
-    ctrl.excluir
+    ctrl.excluir(req, res); 
 });
 router.put('/', auth.validar, (req, res) => {
     // #swagger.tags = ['Usuários']
@@ -68,7 +68,7 @@ router.put('/', auth.validar, (req, res) => {
 
     }
     */
-    ctrl.atualizar
+    ctrl.atualizar(req, res);   
 });
 router.patch('/alterar-email/:id', auth.validar, (req, res) => {
     // #swagger.tags = ['Usuários']
@@ -78,7 +78,7 @@ router.patch('/alterar-email/:id', auth.validar, (req, res) => {
         apiKeyAuth: []
     }]
     */
-    ctrl.alterarEmail
+    ctrl.alterarEmail(req, res);
 });
 
 

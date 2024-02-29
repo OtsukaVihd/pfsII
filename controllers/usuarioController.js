@@ -1,30 +1,12 @@
-var usuarios = [
-    {
-        id: 1,
-        nome: "Vitor",
-        email: "votsuka@unoeste.br",
-        cidade: "Presidente Prudente",
-        sexo: "M",
-        idade: 22,
-        senha: '123'
-    },
-    {
-        id: 2,
-        nome: "Fulano",
-        email: "fulano@unoeste.br",
-        cidade: "Presidente Prudente",
-        sexo: "M",
-        idade: 44,
-        senha: '321'
-    }
-]
-
+import UsuarioModel from "../models/usuarioModel.js";
 
 export default class UsuarioController {
 
-    listar(req, res) {
+    async listar(req, res) {
         try {
-            res.status(200).json(usuarios);
+            let usuario = new UsuarioModel();
+            let listaUsuarios = await usuario.listar();
+            res.status(200).json(listaUsuarios);
         }	
         catch(ex) {
             res.status(500).json(
@@ -33,11 +15,14 @@ export default class UsuarioController {
         }
     }
 
-    obter(req, res) {
+    async obter(req, res) {
         try{
-            let usuario = usuarios.filter(x => x.id == req.params.id);
-            if(usuario.length > 0) {
-                res.status(200).json(usuario);
+            let {id} = req.params;
+            let usuario = new UsuarioModel();
+            let usuarioEncontrado = await usuario.obter(id);
+
+            if(usuarioEncontrado != null) {
+                res.status(200).json(usuarioEncontrado);
             }
             else{
                 res.status(404).json({msg: "Usuário não encontrado"});
@@ -135,12 +120,30 @@ export default class UsuarioController {
 
     }
 
-    criar(req, res) {
+
+    async criar(req, res) {
         try{
             if(req.body) {
-                if(req.body.id > 0 && req.body.nome != "" && req.body.email != "" && req.body.cidade != "" && req.body.sexo != "" && req.body.idade > 0){
-                    usuarios.push(req.body);
-                    res.status(200).json({msg: "Usuário cadastrado com sucesso!"});          
+                let {usuNome, usuEmail, usuSenha, perfil} = req.body;
+
+                if(usuNome != "" && usuEmail != "" && usuSenha != "" && perfil > 0){
+
+                    let usuario = new UsuarioModel();
+
+                    usuario.usuNome = req.body.usuNome;
+                    usuario.usuEmail = req.body.usuEmail;
+                    usuario.usuSenha = req.body.usuSenha;
+                    usuario.perfil = req.body.perfil;
+                    usuario.usuId = 0;
+
+                    let result = await usuario.gravar();
+
+                    if (result){
+                        res.status(201).json({msg: "Usuário cadastrado com sucesso!"});
+                    }
+                    else{
+                        res.status(500).json({msg: "Erro interno!"});
+                    }      
                 }
                 else {
                     res.status(418).json({msg: "Por favor, preencha todas as informações do usuário"})
@@ -150,7 +153,7 @@ export default class UsuarioController {
                 res.status(400).json({msg: "Por favor, informe os dados do usuário"})
             }
         }
-        catch{
+        catch(ex){
             res.status(500).json({msg: "Erro inesperado! Entre em contato com o nosso suporte!", 
             detalhes: ex.message});
         }
