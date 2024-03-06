@@ -24,6 +24,7 @@ const doc = {
     }
 };
 
+
 const outputFile = './swagger_output.json';
 const routes = ['./server.js'];
 
