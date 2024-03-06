@@ -12,7 +12,7 @@ const doc = {
     components: {
         schemas: {
             loginModel: new LoginModel('teste@teste.com', '123').toJSON(),
-            usuarioModel: new UsuarioModel(999, 'Fulano', 'fulano@unoeste.br', '123abc', new PerfilModel(1, "Administrador")).toJSON()
+            usuarioModel: new UsuarioModel(999, "Fulano", "teste@teste.com.br", "123abc", new PerfilModel(1, 'Administrador')).toJSON()
         },
         securitySchemes: {
             apiKeyAuth: {

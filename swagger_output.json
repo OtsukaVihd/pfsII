@@ -387,7 +387,7 @@
           },
           "usuEmail": {
             "type": "string",
-            "example": "fulano@unoeste.br"
+            "example": "teste@teste.com.br"
           },
           "usuSenha": {
             "type": "string",
