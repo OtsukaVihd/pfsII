@@ -53,8 +53,3 @@ export default class Database {
     }
 
 }
-
-module.exports = Database;
-
-
-

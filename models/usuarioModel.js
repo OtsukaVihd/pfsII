@@ -1,4 +1,5 @@
-import Database from '../database/database.js';
+import Database from '../db/database.js';
+import PerfilModel from './perfilModel.js';
 
 let banco = new Database();
 
@@ -58,25 +59,84 @@ export default class UsuarioModel{
             'usuId': this.#usuId,
             'usuNome': this.#usuNome,
             'usuEmail': this.#usuEmail,
-            'usuSenha': this.#usuSenha
+            'usuSenha': this.#usuSenha,
+            'perfil': this.#perfil.toJSON()
         }
+    }
+
+
+    async obter(id){
+        let sql = "select * from tb_usuario where usu_id = ?";
+
+        let valores = [id];
+
+        let row = await banco.ExecutaComando(sql, valores);
+
+        if(row.length > 0){
+            return new UsuarioModel(row[0]['usu_id'], row[0]['usu_nome'], row[0]['usu_email'], row[0]['usu_senha'], row[0]['per_id']);
+        }
+
+        return null;
     }
 
 
     async listar(){
         let lista = [];
-        let sql = "select * from tb_usuario";
+        let sql = "select * from tb_usuario u inner join tb_perfil p on u.per_id = p.per_id";
 
         let rows = await banco.ExecutaComando(sql);
 
-        for(let i = 0; rows.length; i++){
+        for(let i = 0; i < rows.length; i++){
             let row = rows[i];
 
-            lista.push(new UsuarioModel(row['usu_id'], row['usu_nome'], row['usu_email'], row['usu_senha'], row['per_id']));
+            lista.push(new UsuarioModel(row['usu_id'], row['usu_nome'], row['usu_email'], row['usu_senha'], new PerfilModel(row['per_id'], row['per_nome'])));
         }
 
         return lista;
     }
 
+
+    async gravar(){
+
+
+        if(this.#usuId == 0){
+            var sql = 'insert into tb_usuario (usu_nome, usu_email, usu_senha, per_id) values (?, ?, ?, ?)';
+
+            var valores = [this.#usuNome, this.#usuEmail, this.#usuSenha, this.#perfil];
+        }
+        else{
+            var sql = "update tb_usuario set usu_nome = ?, usu_email = ?, usu_senha = ?, per_id = ? where usu_id = ?";
+
+            var valores = [this.#usuNome, this.#usuEmail, this.#usuSenha, this.#perfil.perfilId, this.#usuId];
+        }
+
+        let result = await banco.ExecutaComandoNonQuery(sql, valores);
+            
+        return result;
+    }
+
+
+    async deletar(id){
+
+        let sql = "delete from tb_usuario where usu_id = ?";
+            
+        let valores = [id];
+
+        let result = await banco.ExecutaComandoNonQuery(sql, valores);
+
+        return result;
+
+    }
+
+    async alterarEmail(id, email) {
+
+        let sql = "update tb_usuario set usu_email = ? where usu_id = ?";
+
+        let valores = [email. id];
+
+        let result = await banco.ExecutaComandoNonQuery(sql, valores);
+
+        return result
+    }
 }
 
