@@ -24,5 +24,3 @@ app.use('/login', loginRoute);
 app.listen(5000, function() {
     console.log("backend em execução");
 })
-
-//
