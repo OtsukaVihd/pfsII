@@ -1,3 +1,6 @@
+import Database from '../db/database.js';
+
+const banco = new Database();
 
 export default class PerfilModel{
 
@@ -20,6 +23,17 @@ export default class PerfilModel{
     constructor(perfilId, perfilNome){
         this.#perfilId = perfilId;
         this.#perfilNome = perfilNome;
+    }
+
+    async listar(){
+        let lista = [];
+        let sql = 'select * from tb_perfil';
+
+        let rows = await banco.ExecutaComando(sql);
+
+        for(let i = 0; i < rows.length; i++){
+            lista.push(new PerfilModel(rows[i]['per_id'], rows[i]['per_nome']));
+        }
     }
 
     toJSON(){

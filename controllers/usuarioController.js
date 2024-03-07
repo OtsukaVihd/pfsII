@@ -70,8 +70,8 @@ export default class UsuarioController {
         try{
             if(req.body){
                 let { usuId, usuNome, usuEmail, usuSenha, perfil} = req.body;
-                if(usuId > 0 && usuNome != "" && usuEmail != "" && usuSenha != "" && perfil > 0){
-                    let usuario = new UsuarioModel(usuId, usuNome, usuEmail, usuSenha, new PerfilModel(perfil));
+                if(usuId > 0 && usuNome != "" && usuEmail != "" && usuSenha != "" && perfil.perfilId > 0){
+                    let usuario = new UsuarioModel(usuId, usuNome, usuEmail, usuSenha, new PerfilModel(perfil.perfilId));
 
                     if(await usuario.obter(usuId) != null){
                         
@@ -115,7 +115,7 @@ export default class UsuarioController {
                 let { id } = req.params;
                 let { email } = req.body;
                 
-                let usuario = new usuarioModel();
+                let usuario = new UsuarioModel();
                 if(await usuario.obter(id) != null){
                     let result = await usuario.alterarEmail(id, email);
                     if(result){
@@ -163,15 +163,14 @@ export default class UsuarioController {
             if(req.body) {
                 let {usuNome, usuEmail, usuSenha, perfil} = req.body;
 
-                if(usuNome != "" && usuEmail != "" && usuSenha != "" && perfil > 0){
+                if(usuNome != "" && usuEmail != "" && usuSenha != "" && perfil.perfilId > 0){
 
                     let usuario = new UsuarioModel();
-
+                    usuario.usuId = 0;
                     usuario.usuNome = usuNome;
                     usuario.usuEmail = usuEmail;
                     usuario.usuSenha = usuSenha;
-                    usuario.perfil = new PerfilModel(perfil);
-                    usuario.usuId = 0;
+                    usuario.perfil = new PerfilModel(perfil.perfilId);
 
                     let result = await usuario.gravar();
 
