@@ -11,15 +11,15 @@ export default class LoginModel {
     get email(){
         return this.#email;
     }
-    set email(value){
-        this.#email = value;
+    set email(email){
+        this.#email = email;
     }
 
     get senha(){
         return this.#senha;
     }
-    set senha(value){
-        this.#senha = value;
+    set senha(senha){
+        this.#senha = senha;
     }
 
     constructor(email, senha){

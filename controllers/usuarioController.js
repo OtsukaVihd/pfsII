@@ -194,4 +194,5 @@ export default class UsuarioController {
             detalhes: ex.message});
         }
     }
+    
 }
