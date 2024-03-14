@@ -66,14 +66,14 @@ export default class UsuarioModel{
 
 
     async obter(id){
-        let sql = "select * from tb_usuario where usu_id = ?";
+        let sql = "select * from tb_usuario u inner join tb_perfil p on u.per_id = p.per_id where usu_id = ?";
 
         let valores = [id];
 
         let row = await banco.ExecutaComando(sql, valores);
 
         if(row.length > 0){
-            return new UsuarioModel(row[0]['usu_id'], row[0]['usu_nome'], row[0]['usu_email'], row[0]['usu_senha'], row[0]['per_id']);
+            return new UsuarioModel(row[0]['usu_id'], row[0]['usu_nome'], row[0]['usu_email'], row[0]['usu_senha'], new PerfilModel(row[0]['per_id'], row[0]['per_nome']));
         }
 
         return null;
@@ -96,13 +96,28 @@ export default class UsuarioModel{
     }
 
 
+    async obterPorEmailSenha(email, senha){
+        let sql = 'select * from tb_usuario where usu_email = ? and usu_senha = ?'
+
+        let valores = [email, senha];
+
+        let row = await banco.ExecutaComando(sql, valores);
+
+        if(row.length > 0){
+            return new UsuarioModel(row[0]['usu_id'], row[0]['usu_nome'], row[0]['usu_email'], row[0]['usu_senha'], new PerfilModel(row[0]['per_id'], row[0]['per_nome']));
+        }
+
+        return null;
+    }
+
+
     async gravar(){
 
 
         if(this.#usuId == 0){
             var sql = 'insert into tb_usuario (usu_nome, usu_email, usu_senha, per_id) values (?, ?, ?, ?)';
 
-            var valores = [this.#usuNome, this.#usuEmail, this.#usuSenha, this.#perfil];
+            var valores = [this.#usuNome, this.#usuEmail, this.#usuSenha, this.#perfil.perfilId];
         }
         else{
             var sql = "update tb_usuario set usu_nome = ?, usu_email = ?, usu_senha = ?, per_id = ? where usu_id = ?";
@@ -127,6 +142,7 @@ export default class UsuarioModel{
         return result;
 
     }
+
 
     async alterarEmail(id, email) {
 

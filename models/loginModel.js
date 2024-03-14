@@ -1,4 +1,6 @@
+import Database from '../db/database.js';
 
+const banco = new Database();
 
 export default class LoginModel {
     
@@ -9,20 +11,31 @@ export default class LoginModel {
     get email(){
         return this.#email;
     }
-    set email(value){
-        this.#email = value;
+    set email(email){
+        this.#email = email;
     }
 
     get senha(){
         return this.#senha;
     }
-    set senha(value){
-        this.#senha = value;
+    set senha(senha){
+        this.#senha = senha;
     }
 
     constructor(email, senha){
         this.email = email;
         this.senha = senha;
+    }
+
+    async autenticar(){
+        
+        let sql = 'select usu_id from tb_usuario where usu_email = ? and usu_senha = ?';
+
+        let valores = [this.#email, this.#senha];
+
+        let rows = await banco.ExecutaComando(sql, valores);
+
+        return rows.length > 0;
     }
 
     toJSON(){
