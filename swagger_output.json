@@ -374,8 +374,197 @@
     },
     "/imovel/": {
       "get": {
+        "tags": [
+          "Imóvel"
+        ],
+        "summary": "Lista os imóveis cadastrados",
         "description": "",
         "parameters": [
+          {
+            "name": "chaveapi",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "apiKeyAuth": [
+              "PFSII"
+            ]
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "Imóvel"
+        ],
+        "summary": "Cria um novo imóvel",
+        "description": "",
+        "parameters": [
+          {
+            "name": "chaveapi",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "apiKeyAuth": [
+              "PFSII"
+            ]
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/imovelModel"
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Imóvel"
+        ],
+        "summary": "Atualiza um imóvel",
+        "description": "",
+        "parameters": [
+          {
+            "name": "chaveapi",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "apiKeyAuth": [
+              "PFSII"
+            ]
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/imovelModel"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/imovel/{id}": {
+      "get": {
+        "tags": [
+          "Imóvel"
+        ],
+        "summary": "Obtém um imóvel pelo ID",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "chaveapi",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "apiKeyAuth": [
+              "PFSII"
+            ]
+          }
+        ]
+      }
+    },
+    "/imovel/excluir/{id}": {
+      "delete": {
+        "tags": [
+          "Imóvel"
+        ],
+        "summary": "Exclui um imóvel pelo ID",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
           {
             "name": "chaveapi",
             "in": "header",
@@ -451,6 +640,47 @@
                 "example": "Administrador"
               }
             }
+          }
+        }
+      },
+      "imovelModel": {
+        "type": "object",
+        "properties": {
+          "imovelId": {
+            "type": "number",
+            "example": 0
+          },
+          "imovelDescricao": {
+            "type": "string",
+            "example": "Casa com 3 quartos e 2 banheiros"
+          },
+          "imovelValor": {
+            "type": "number",
+            "example": 1005
+          },
+          "imovelCep": {
+            "type": "string",
+            "example": "12345-678"
+          },
+          "imovelEndereco": {
+            "type": "string",
+            "example": "Rua dos bobos, nº 0"
+          },
+          "imovelBairro": {
+            "type": "string",
+            "example": "Bairro 1"
+          },
+          "imovelCidade": {
+            "type": "string",
+            "example": "Cidade 1"
+          },
+          "imovelUf": {
+            "type": "string",
+            "example": "SP"
+          },
+          "imovelDisponivel": {
+            "type": "string",
+            "example": "S"
           }
         }
       }

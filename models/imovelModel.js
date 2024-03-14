@@ -103,6 +103,14 @@ export default class ImovelModel{
         }
     }
 
+    toMap(rows){
+        let lista = [];
+        for(let i = 0; i < rows.length; i++){
+            let row = rows[i]
+            lista.push(new ImovelModel(row['imv_id'], row['imv_desc'], row['imv_valor'], row['imv_cep'], row['imv_endereco'], row['imv_bairro'], row['imv_cidade'], row['imv_uf'], row['imv_disponivel']));
+        }
+        return lista;
+    }
 
     async listar(){
         let sql = 'select * from tb_imovel';
@@ -111,11 +119,54 @@ export default class ImovelModel{
         
         let lista = [];
 
-        for(let i = 0; i < rows.length; i++){
-            lista.push(new ImovelModel(rows[i]['imv_id'], rows[i]['imv_desc'], rows[i]['imv_valor'], rows[i]['imv_cep'], rows[i]['imv_endereco'], rows[i]['imv_bairro'], rows[i]['imv_cidade'], rows[i]['imv_uf'], rows[i]['imv_disponivel']));
-        }
+        lista = this.toMap(rows);
 
         return lista;
-
     }
+
+    async obter(id){
+        let sql = `select * from tb_imovel where imv_id = ?`;
+
+        let valores = [id];        
+
+        let rows = await banco.ExecutaComando(sql, valores);
+
+        if(rows.length > 0){
+            return this.toMap(rows)[0];
+        }
+        else{
+            return null;
+        }
+    }
+
+    async excluir(id){
+        let sql = 'delete from tb_imovel where imv_id = ?';
+
+        let valores = [id];
+
+        let result = await banco.ExecutaComandoNonQuery(sql, valores);
+
+        return result;
+    }
+
+    async gravar(){
+        let sql = ''
+        let valores = [];
+
+        if(this.#imovelId == 0){
+            sql = 'insert into tb_imovel (imv_desc, imv_valor, imv_cep, imv_endereco, imv_bairro, imv_cidade, imv_uf, imv_disponivel) values (?, ?, ?, ?, ?, ?, ?, ?)';
+
+            valores = [this.#imovelDescricao, this.#imovelValor, this.#imovelCep, this.#imovelEndereco, this.#imovelBairro, this.#imovelCidade, this.#imovelUf, this.#imovelDisponivel];
+        }
+        else{
+            sql = 'update tb_imovel set imv_desc = ?, imv_valor = ?, imv_cep = ?, imv_endereco = ?, imv_bairro = ?, imv_cidade = ?, imv_uf = ?, imv_disponivel = ? where imv_id = ?';
+
+            valores = [this.#imovelDescricao, this.#imovelValor, this.#imovelCep, this.#imovelEndereco, this.#imovelBairro, this.#imovelCidade, this.#imovelUf, this.#imovelDisponivel, this.#imovelId];
+        }
+
+        let result = await banco.ExecutaComandoNonQuery(sql, valores);
+
+        return result;
+    }
+
 }

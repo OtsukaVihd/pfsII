@@ -21,7 +21,13 @@ app.use('/docs', swaggerUi.serve, swaggerUi.setup(outputJson));
 app.use('/usuarios', usuarioRoute);
 app.use('/perfil', perfilRoute);
 app.use('/login', loginRoute);
-app.use('/imovel', imovelRoute);
+app.use('/imovel',
+    /*  #swagger.tags = ['Imóvel']
+        #swagger.security = [{
+        apiKeyAuth: ['PFSII']
+    }]
+    */
+imovelRoute);
 
 app.listen(5000, function() {
     console.log("backend em execução");
