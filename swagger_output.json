@@ -40,9 +40,7 @@
         },
         "security": [
           {
-            "apiKeyAuth": [
-              "PFSII"
-            ]
+            "apiKeyAuth": []
           }
         ]
       },
@@ -80,9 +78,7 @@
         },
         "security": [
           {
-            "apiKeyAuth": [
-              "PFSII"
-            ]
+            "apiKeyAuth": []
           }
         ],
         "requestBody": {
@@ -130,9 +126,7 @@
         },
         "security": [
           {
-            "apiKeyAuth": [
-              "PFSII"
-            ]
+            "apiKeyAuth": []
           }
         ],
         "requestBody": {
@@ -187,9 +181,7 @@
         },
         "security": [
           {
-            "apiKeyAuth": [
-              "PFSII"
-            ]
+            "apiKeyAuth": []
           }
         ]
       }
@@ -234,9 +226,7 @@
         },
         "security": [
           {
-            "apiKeyAuth": [
-              "PFSII"
-            ]
+            "apiKeyAuth": []
           }
         ]
       }
@@ -285,9 +275,7 @@
         },
         "security": [
           {
-            "apiKeyAuth": [
-              "PFSII"
-            ]
+            "apiKeyAuth": []
           }
         ],
         "requestBody": {
@@ -335,9 +323,7 @@
         },
         "security": [
           {
-            "apiKeyAuth": [
-              "PFSII"
-            ]
+            "apiKeyAuth": []
           }
         ]
       }
@@ -401,9 +387,7 @@
         },
         "security": [
           {
-            "apiKeyAuth": [
-              "PFSII"
-            ]
+            "apiKeyAuth": []
           }
         ]
       },
@@ -438,9 +422,7 @@
         },
         "security": [
           {
-            "apiKeyAuth": [
-              "PFSII"
-            ]
+            "apiKeyAuth": []
           }
         ],
         "requestBody": {
@@ -485,9 +467,7 @@
         },
         "security": [
           {
-            "apiKeyAuth": [
-              "PFSII"
-            ]
+            "apiKeyAuth": []
           }
         ],
         "requestBody": {
@@ -542,9 +522,7 @@
         },
         "security": [
           {
-            "apiKeyAuth": [
-              "PFSII"
-            ]
+            "apiKeyAuth": []
           }
         ]
       }
@@ -586,15 +564,19 @@
         },
         "security": [
           {
-            "apiKeyAuth": [
-              "PFSII"
-            ]
+            "apiKeyAuth": []
           }
         ]
       }
     }
   },
   "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer"
+      }
+    },
     "schemas": {
       "loginModel": {
         "type": "object",
@@ -683,14 +665,6 @@
             "example": "S"
           }
         }
-      }
-    },
-    "securitySchemes": {
-      "apiKeyAuth": {
-        "type": "apiKey",
-        "in": "header",
-        "name": "chaveapi",
-        "description": "Chave de acesso para a utilização da API"
       }
     }
   }
