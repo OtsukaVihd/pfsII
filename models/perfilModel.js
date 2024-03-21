@@ -32,8 +32,11 @@ export default class PerfilModel{
         let rows = await banco.ExecutaComando(sql);
 
         for(let i = 0; i < rows.length; i++){
-            lista.push(new PerfilModel(rows[i]['per_id'], rows[i]['per_nome']));
+            const row = rows[i]
+            lista.push(new PerfilModel(row['per_id'], row['per_nome']));
         }
+
+        return lista
     }
 
     toJSON(){

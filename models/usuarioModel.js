@@ -11,7 +11,7 @@ export default class UsuarioModel{
     #usuSenha;
     #perfil;
 
-    get (usuId){
+    get usuId(){
         return this.#usuId;
     }
     set usuId (usuId){

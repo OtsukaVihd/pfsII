@@ -4,6 +4,7 @@ import perfilRoute from './routes/perfilRoute.js'
 import loginRoute from './routes/loginRoute.js'
 import imovelRoute from './routes/imovelRoute.js'
 import cookieParser from 'cookie-parser';
+import locacaoRoute from './routes/locacaoRoute.js'
 
 import { createRequire } from 'module';
 const require = createRequire(import.meta.url);
@@ -30,6 +31,14 @@ app.use('/imovel',
     }]
     */
 imovelRoute);
+app.use('/locacao',
+    /*  #swagger.tags = ['Locação']
+        #swagger.summary = ''
+        #swagger.security = [{
+        apiKeyAuth: []
+    }]
+    */
+locacaoRoute);
 
 app.listen(5000, function() {
     console.log("backend em execução");
