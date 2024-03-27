@@ -1,6 +1,6 @@
 import Database from '../db/database.js';
 
-const banco = new Database();
+let banco = new Database();
 
 export default class ContratoModel {
 
@@ -35,7 +35,12 @@ export default class ContratoModel {
         this.#usuario = usuario;
     }
 
-    async gravar(){
+    async gravar(bd){
+    
+        if(bd != null)
+            banco = bd;
+        
+
         let sql = `insert into tb_contrato (imv_id, usu_id) values (?, ?)`;
 
         let valores = [this.#imovel.imovelId, this.#usuario.usuId]
@@ -46,11 +51,11 @@ export default class ContratoModel {
     
     }
 
-    async listar(){
-        let sql = "select * from tb_contrato"
+    // async listar(){
+    //     let sql = "select * from tb_contrato"
 
-        let lista = await banco.ExecutaComando(sql);
+    //     let lista = await banco.ExecutaComando(sql);
 
-        return lista;
-    }
+    //     return lista;
+    // }
 }

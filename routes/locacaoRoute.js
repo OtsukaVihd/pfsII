@@ -15,10 +15,11 @@ router.post('/alugar', auth.validar, (req, res) => {
         required: true,
         content: {
             'application/json': {
-                schema: { $ref: "#/components/schemas/locacaoModel" }
+                schema: { 
+                    $ref: ""
+                }
             }
         }
-
     }
     */
     ctrl.locar(req, res)

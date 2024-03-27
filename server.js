@@ -27,7 +27,7 @@ app.use('/login', loginRoute);
 app.use('/imovel',
     /*  #swagger.tags = ['Imóvel']
         #swagger.security = [{
-        apiKeyAuth: []
+        "bearerAuth": []
     }]
     */
 imovelRoute);
@@ -35,7 +35,7 @@ app.use('/locacao',
     /*  #swagger.tags = ['Locação']
         #swagger.summary = ''
         #swagger.security = [{
-        apiKeyAuth: []
+            "bearerAuth": []
     }]
     */
 locacaoRoute);
