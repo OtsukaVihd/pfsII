@@ -10,7 +10,7 @@ router.get('/', auth.validar, (req, res) => {
     // #swagger.tags = ['Perfil']
     // #swagger.summary = 'Lista os perfis cadastrados'
     /* #swagger.security = [{
-        apiKeyAuth: ['PFSII']
+        apiKeyAuth: []
     }]
     */
     ctrl.listar(req, res);

@@ -16,7 +16,9 @@ export default class PerfilController {
                     usuario.usuSenha = '';
 
                     let auth = new Autenticacao();
-                    let token = auth.gerarToken(usuario);
+                    let token = auth.gerarToken(usuario.toJSON());
+
+                    res.cookie('jwt', token, {httpOnly: true})
 
                     res.status(200).json({tokenAcesso: token});
                 }
@@ -30,5 +32,6 @@ export default class PerfilController {
             detalhes: ex.message});
         }
     }
+
 
 }

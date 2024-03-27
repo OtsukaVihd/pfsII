@@ -1,6 +1,6 @@
 import Database from "../db/database.js";
 
-const banco = new Database();
+let banco = new Database();
 
 export default class ImovelModel{
 
@@ -149,11 +149,15 @@ export default class ImovelModel{
         return result;
     }
 
-    async gravar(){
+    async gravar(bd){
+
+        if(bd != null)
+            banco = bd;
+
         let sql = ''
         let valores = [];
 
-        if(this.#imovelId == 0){
+        if(this.#imovelId == 0 || this.#imovelId == null){
             sql = 'insert into tb_imovel (imv_desc, imv_valor, imv_cep, imv_endereco, imv_bairro, imv_cidade, imv_uf, imv_disponivel) values (?, ?, ?, ?, ?, ?, ?, ?)';
 
             valores = [this.#imovelDescricao, this.#imovelValor, this.#imovelCep, this.#imovelEndereco, this.#imovelBairro, this.#imovelCidade, this.#imovelUf, this.#imovelDisponivel];

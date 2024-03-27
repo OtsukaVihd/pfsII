@@ -11,7 +11,7 @@ export default class UsuarioModel{
     #usuSenha;
     #perfil;
 
-    get (usuId){
+    get usuId(){
         return this.#usuId;
     }
     set usuId (usuId){
@@ -112,17 +112,17 @@ export default class UsuarioModel{
 
 
     async gravar(){
-
-
+        let sql = ''
+        let valores = ''
         if(this.#usuId == 0){
-            var sql = 'insert into tb_usuario (usu_nome, usu_email, usu_senha, per_id) values (?, ?, ?, ?)';
+            sql = 'insert into tb_usuario (usu_nome, usu_email, usu_senha, per_id) values (?, ?, ?, ?)';
 
-            var valores = [this.#usuNome, this.#usuEmail, this.#usuSenha, this.#perfil.perfilId];
+            valores = [this.#usuNome, this.#usuEmail, this.#usuSenha, this.#perfil.perfilId];
         }
         else{
-            var sql = "update tb_usuario set usu_nome = ?, usu_email = ?, usu_senha = ?, per_id = ? where usu_id = ?";
+            sql = "update tb_usuario set usu_nome = ?, usu_email = ?, usu_senha = ?, per_id = ? where usu_id = ?";
 
-            var valores = [this.#usuNome, this.#usuEmail, this.#usuSenha, this.#perfil.perfilId, this.#usuId];
+            valores = [this.#usuNome, this.#usuEmail, this.#usuSenha, this.#perfil.perfilId, this.#usuId];
         }
 
         let result = await banco.ExecutaComandoNonQuery(sql, valores);
