@@ -1,5 +1,6 @@
 'use client'
 import { useState } from "react"
+import BemVindo from "../components/bemvindo"
 
 export default function Carros() {
 
@@ -12,6 +13,7 @@ export default function Carros() {
 
     return (
         <div>
+            <BemVindo></BemVindo>
             <h1>Primeiro componente</h1>
             <button onClick={toggleLista} className="" id="toggle">Toggle list</button>
             {
