@@ -1,0 +1,13 @@
+.listaFilmes{
+    display: grid;
+    grid-template: "200px 200px 200px";
+    gap: "10px";
+}
+
+@media screen and (max-width: 1070px) {
+    .listaFilmes{grid-template: "200px 200px";}
+}
+
+@media screen and (max-width: 700px) {
+    .listaFilmes{grid-template: "200px";}
+}
