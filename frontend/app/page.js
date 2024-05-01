@@ -17,9 +17,7 @@ export default function Home() {
   return (
     <div>
       <h1>Rota Inicial</h1>
-      <button onClick={stateTeste}>Dispara state</button>
-      <Formulario></Formulario>
-      <BemVindo></BemVindo>
+
     </div>
   )
 }

@@ -5,6 +5,7 @@ import loginRoute from './routes/loginRoute.js'
 import imovelRoute from './routes/imovelRoute.js'
 import cookieParser from 'cookie-parser';
 import locacaoRoute from './routes/locacaoRoute.js'
+import cors from 'cors'
 
 import { createRequire } from 'module';
 const require = createRequire(import.meta.url);
@@ -17,6 +18,7 @@ const app = express();
 
 app.use(cookieParser());
 app.use(express.json());
+app.use(cors({origin: "http://localhost:3000", credentials: true}));
 
 //pag de documentação
 app.use('/docs', swaggerUi.serve, swaggerUi.setup(outputJson));

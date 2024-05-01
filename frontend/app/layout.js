@@ -44,15 +44,15 @@ export default function RootLayout({ children }) {
                 </div>
     
                 <li className="nav-item">
-                    <a className="nav-link" href="/carros">
-                        <i className="fas fa-fw fa-cog"></i>
-                        <span>Carros</span>
+                    <a className="nav-link" href="/usuario">
+                        <i className="fas fa-fw fa-user"></i>
+                        <span>Usuarios</span>
                     </a>
                 </li>
                 <li className="nav-item">
-                <a className="nav-link" href="/filmes">
-                        <i className="fas fa-fw fa-cog"></i>
-                        <span>Filmes</span>
+                <a className="nav-link" href="/imovel">
+                        <i className="fas fa-fw fa-build"></i>
+                        <span>Imóveis</span>
                     </a>
                 </li>
 
