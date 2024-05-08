@@ -3,16 +3,24 @@ import { useEffect } from "react"
 
 export default function MontaTabela(props) {
 
-    let cabecalho = props.lista.length > 0 ? Object.keys(props.lista[0]) : []
+    let cabecalho = []
+    if (props.cabecalhos == null || props.cabecalhos.length == 0) {
+        cabecalho = props.lista.length > 0 ? Object.keys(props.lista[0]) : [];
+    }
+    else {
+        cabecalho = props.cabecalhos
+    }
 
     useEffect(() => {
         console.log(props.lista)
     })
+    if (cabecalho.find(x => x == "Ações") == undefined)
+        cabecalho.push("Ações");
 
     return (
-        <div>
-            <table>
-                <thead style={{backgroundColor: '#666', color: 'white'}}>
+        <div className="table-responsive">
+            <table className="table table-striped">
+                <thead style={{ backgroundColor: '#666', color: 'white' }}>
                     <tr>
                         {
                             cabecalho.map((value, index) => {
@@ -23,13 +31,17 @@ export default function MontaTabela(props) {
                 </thead>
                 <tbody>
                     {
-                        props.lista.map((value, index) => {
-                            return <tr key={index}>
-                                <td>{value.nome}</td>
-                                <td>{value.email}</td>
-                                <td>{value.dia}</td>
+                        props.lista.map((value, index) => (
+                            <tr>
+                                {
+                                    cabecalho.map((cab, index) => {
+                                        return <td>
+                                            {value[cab]}
+                                        </td>
+                                    })
+                                }
                             </tr>
-                        })
+                        ))
                     }
                 </tbody>
             </table>
