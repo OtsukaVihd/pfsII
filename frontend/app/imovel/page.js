@@ -26,7 +26,7 @@ export default function Imovel() {
             <h1>Imóveis cadastrados</h1>
             <button className="btn btn-primary" style={{ marginBottom: "10px" }}>Cadastrar imóvel</button>
             <div>
-                <MontaTabela lista={listaImoveis} />
+                <MontaTabela lista={listaImoveis} cabecalhos={["Código", "Descricao", "Valor", "CEP", "Endereço", "Bairro", "Cidade", "UF", "Disponível"]}/>
             </div>
         </div>
 

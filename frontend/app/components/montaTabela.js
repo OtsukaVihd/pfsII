@@ -4,6 +4,8 @@ import { useEffect } from "react"
 export default function MontaTabela(props) {
 
     let cabecalho = []
+    let propriedades = props.lista.length > 0 ? Object.keys(props.lista[0]) : [];
+
     if (props.cabecalhos == null || props.cabecalhos.length == 0) {
         cabecalho = props.lista.length > 0 ? Object.keys(props.lista[0]) : [];
     }
@@ -17,6 +19,9 @@ export default function MontaTabela(props) {
     if (cabecalho.find(x => x == "Ações") == undefined)
         cabecalho.push("Ações");
 
+    if (propriedades.find(x => x == "Ações") == undefined)
+        propriedades.push("Ações");
+
     return (
         <div className="table-responsive">
             <table className="table table-striped">
@@ -24,7 +29,7 @@ export default function MontaTabela(props) {
                     <tr>
                         {
                             cabecalho.map((value, index) => {
-                                return <th key={index}>{value}</th>
+                                return <th key={index}>{value.includes("|") ? value.split("|")[0] : value}</th>
                             })
                         }
                     </tr>
@@ -34,12 +39,31 @@ export default function MontaTabela(props) {
                         props.lista.map((value, index) => (
                             <tr>
                                 {
-                                    cabecalho.map((cab, index) => {
-                                        return <td>
-                                            {value[cab]}
-                                        </td>
+                                    propriedades.map((cab, index) => {
+                                        if (cab != 'Ações') {
+                                            if (typeof (value[cab]) == "object") {
+                                                let propObject = cabecalho[index].split("|")[1];
+                                                return <td>
+                                                    {value[cab][propObject]}
+                                                </td>
+                                            }
+                                            else {
+                                                return <td>
+                                                    {value[cab]}
+                                                </td>
+                                            }
+                                        }
+                                        else {
+                                            return <td>
+                                                <div>
+                                                    <button className="btn btn-primary  mr-1 mb-1"><i className="fas fa-pen"></i></button>
+                                                    <button className="btn btn-danger  mr-1 mb-1"><i className="fas fa-trash"></i></button>
+                                                </div>
+                                            </td>
+                                        }
                                     })
                                 }
+
                             </tr>
                         ))
                     }

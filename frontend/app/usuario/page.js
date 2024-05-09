@@ -15,18 +15,18 @@ export default  function Usuario(){
             return r.json()
         })
         .then(r=> {
-            setListaUsuarios(r)
+            setListaUsuarios(r);
         })
     }
 
     return(
         <div>
-            <h1>Usuário</h1>
+            <h1>Usuários cadastrados</h1>
             <div>
-                <button className="btn btn-primary">Cadastrar usuario</button>
+                <a href="/usuario/cadastro" style={{marginBottom: "15px"}} className="btn btn-primary">Cadastrar usuario</a>
             </div>
             <div>
-                <MontaTabela lista={listaUsuarios}  cabecalhos={["Código", "Nome", "Email", "Senha", "Perfil"]}/>
+                <MontaTabela lista={listaUsuarios}  cabecalhos={["Código", "Nome", "Email", "Senha", "Nome do perfil|perfilNome"]}/>
             </div>
         </div>
     )
