@@ -56,8 +56,8 @@ export default function MontaTabela(props) {
                                         else {
                                             return <td>
                                                 <div>
-                                                    <button className="btn btn-primary  mr-1 mb-1"><i className="fas fa-pen"></i></button>
-                                                    <button className="btn btn-danger  mr-1 mb-1"><i className="fas fa-trash"></i></button>
+                                                    <a href={props.alteracao + `/${value.usuId}`} className="btn btn-primary  mr-1 mb-1"><i className="fas fa-pen"></i></a>
+                                                    <button onClick={()=> props.exclusao(value.usuId)} className="btn btn-danger  mr-1 mb-1"><i className="fas fa-trash"></i></button>
                                                 </div>
                                             </td>
                                         }
